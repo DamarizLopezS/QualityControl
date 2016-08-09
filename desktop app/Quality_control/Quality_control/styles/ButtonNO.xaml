@@ -1,0 +1,79 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WPFAppQualityControl.styles">
+
+    <Style TargetType="Button" x:Key="buttonNO">
+        <Setter Property="Foreground" Value="{StaticResource brushNOButton}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource brushNOButton}"></Setter>
+
+        <Setter Property="BorderThickness" Value="2"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+        <Setter Property="Padding" Value="5"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <!-- Borde y fondo -->
+                    <Border x:Name="borderNormal"
+                            Margin="{TemplateBinding Margin}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="10">
+                        <!-- Fondo del botón -->
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <LinearGradientBrush.GradientStops>
+                                    <GradientStop x:Name="ButtonNOBackgroundStart"
+                                                  Color="{StaticResource colorButtonNOBackgroundTop}"
+                                                  Offset="0"></GradientStop>
+                                    <GradientStop x:Name="ButtonCancelBackgroundEnd"
+                                                  Color="{StaticResource colorButtonNOBackgroundBottom}"
+                                                  Offset="1"></GradientStop>
+                                </LinearGradientBrush.GradientStops>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <ContentPresenter Margin="{TemplateBinding Padding}"></ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--CLICK-->
+    <Style TargetType="Button" x:Key="buttonNOClick">
+        <Setter Property="Foreground" Value="{StaticResource brushNOButtonClick}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource brushNOButtonClick}"></Setter>
+
+        <Setter Property="BorderThickness" Value="2"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+        <Setter Property="Padding" Value="5"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <!-- Borde y fondo -->
+                    <Border x:Name="borderNormal"
+                            Margin="{TemplateBinding Margin}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="10">
+                        <!-- Fondo del botón -->
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <LinearGradientBrush.GradientStops>
+                                    <GradientStop x:Name="ButtonNOBackgroundStart"
+                                                  Color="{StaticResource colorButtonNOBackgroundTopClick}"
+                                                  Offset="0"></GradientStop>
+                                    <GradientStop x:Name="ButtonCancelBackgroundEnd"
+                                                  Color="{StaticResource colorButtonNOBackgroundBottomClick}"
+                                                  Offset="1"></GradientStop>
+                                </LinearGradientBrush.GradientStops>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <ContentPresenter Margin="{TemplateBinding Padding}"></ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    
+</ResourceDictionary>

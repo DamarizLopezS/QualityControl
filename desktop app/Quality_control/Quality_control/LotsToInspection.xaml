@@ -1,0 +1,36 @@
+﻿<Window x:Class="WPFAppQualityControl.LotsToInspection"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFAppQualityControl"
+        mc:Ignorable="d"
+        Title="To Inspection" Height="300" Width="300" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <DataGrid Name="dgLots"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  AutoGenerateColumns="False"
+                  Margin="10"
+                  IsReadOnly="True"
+                  >
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="Button_Click"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTextColumn Header="# Lot" Binding="{Binding Code}"></DataGridTextColumn>
+
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}"></DataGridTextColumn>
+                
+                <DataGridTextColumn Header="Product" Binding="{Binding Product.Code}"></DataGridTextColumn>
+
+                <DataGridTextColumn Header="Product name" Binding="{Binding Product.Name}" Width="150"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
