@@ -105,4 +105,9 @@ public class Item {
             _status = value;
         }
     }
+
+    public override bool Equals(object obj)
+    {
+        return obj is Item && (obj as Item).Serie == this.Serie;
+    }
 }//end Item

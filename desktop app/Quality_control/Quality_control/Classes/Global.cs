@@ -12,7 +12,6 @@ public class Global
     private static Lot _currentLot;
     private static Item _item;
     private static List<Answer> _answers;
-    private static Inspection[] _inspections;
     private static List<List<Inspection[]>> _lotInspecitons;
 
     public static List<Lot> Lots
@@ -112,6 +111,9 @@ public class Global
         }
     }
 
+    /// <summary>
+    /// Inspections by lots
+    /// </summary>
     public static List<List<Inspection[]>> LotInspecitons
     {
         get
@@ -133,15 +135,34 @@ public class Global
         }
     }
 
-    public static List<Inspection[]> Inspections
+    /// <summary>
+    /// Inspections by items from global Lot
+    /// </summary>
+    public static List<Inspection[]> ItemInspections
     {
         get
         {
-            return _lotInspecitons[Get.GlobalPosition(_lot)];
+            return LotInspecitons[Get.GlobalPosition(_lot)];
         }
         set
         {
+            LotInspecitons[Get.GlobalPosition(_lot)] = value;
+        }
+    }
 
+
+    /// <summary>
+    /// Inspections from global Item
+    /// </summary>
+    public static Inspection[] Inspections
+    {
+        get
+        {
+            return ItemInspections[Get.GlobalPosition(_item)];
+        }
+        set
+        {
+            ItemInspections[Get.GlobalPosition(_item)] = value;
         }
     }
 }

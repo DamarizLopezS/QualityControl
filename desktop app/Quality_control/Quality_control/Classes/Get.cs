@@ -130,6 +130,19 @@ public class Get
         return index;
     }
 
+    public static int GlobalPosition(Item item)
+    {
+        int index=-1;
+
+        for (int i = 0; i < Global.Items.Count; i++)
+        {
+            if (item == Global.Items[i])
+                index = i;
+        }
+
+        return index;
+    }
+
     public static bool IsInspectionChanged(List<Inspection> inspections)
     {
         bool isChanged = false;

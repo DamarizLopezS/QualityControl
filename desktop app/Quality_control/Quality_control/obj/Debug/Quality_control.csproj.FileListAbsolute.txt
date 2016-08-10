@@ -30,3 +30,11 @@ C:\Users\i5\Dropbox\UTT\Sistemas\Proyectos\3ro\Quality control\desktop app\Quali
 D:\GitHub\Quality control\desktop app\Quality_control\Quality_control\bin\Debug\Quality_control.exe.config
 D:\GitHub\Quality control\desktop app\Quality_control\Quality_control\obj\Debug\Quality_control.exe
 D:\GitHub\Quality control\desktop app\Quality_control\Quality_control\obj\Debug\Quality_control.pdb
+D:\GitHub\Quality control\desktop app\Quality_control\Quality_control\obj\Debug\Quality_control.csprojResolveAssemblyReference.cache
+D:\GitHub\Quality control\desktop app\Quality_control\Quality_control\obj\Debug\InspectionStats.g.cs
+D:\GitHub\Quality control\desktop app\Quality_control\Quality_control\obj\Debug\InspectionWindow.g.cs
+D:\GitHub\Quality control\desktop app\Quality_control\Quality_control\obj\Debug\LotsToInspection.g.cs
+D:\GitHub\Quality control\desktop app\Quality_control\Quality_control\obj\Debug\MainWindow.g.cs
+D:\GitHub\Quality control\desktop app\Quality_control\Quality_control\obj\Debug\App.g.cs
+D:\GitHub\Quality control\desktop app\Quality_control\Quality_control\obj\Debug\Quality_control_MarkupCompile.cache
+D:\GitHub\Quality control\desktop app\Quality_control\Quality_control\obj\Debug\Quality_control_MarkupCompile.lref
