@@ -6,13 +6,13 @@ using System.Text;
 public class Global
 {
     private static List<Lot> _lots;
-    private static List<List<Item>> _lotItems;
-
     private static Lot _lot;
-    private static Lot _currentLot;
+
+    private static List<Item> _items;
     private static Item _item;
-    private static List<Answer> _answers;
-    private static List<List<Inspection[]>> _lotInspecitons;
+
+    private static List<Inspection> _inspections;
+    private static Inspection _inspection;
 
     public static List<Lot> Lots
     {
@@ -24,38 +24,6 @@ public class Global
         set
         {
             _lots = value;
-        }
-    }
-
-    public static List<List<Item>> LotItems
-    {
-        get
-        {
-            if (_lotItems == null || _lotItems.Count == 0 || _lots.Count > _lotItems.Count)
-            {
-                _lotItems = new List<List<Item>>();
-                if (_lots != null)
-                {
-                    foreach (Lot lot in _lots)
-                    {
-                        List<Item> items = Catalog.Items(lot);
-                        _lotItems.Add(items);
-                    }
-                }
-            }
-            return _lotItems;
-        }
-        set
-        {
-            _lotItems = value;
-        }
-    }
-
-    public static List<Item> Items
-    {
-        get
-        {
-            return LotItems[Get.GlobalPosition(Lot)];
         }
     }
 
@@ -72,97 +40,56 @@ public class Global
         }
     }
 
+    public static List<Item> Items
+    {
+        get
+        {
+            Items = Catalog.Items(_lot);
+            return _items;
+        }
+        private set
+        {
+            _items = value;
+        }
+    }
+
     public static Item Item
     {
-        get
-        {
-            return _item;
-        }
-
-        set
-        {
-            _item = value;
-        }
+        get { return _item; }
+        set { _item = value; }
     }
 
-    public static List<Answer> Answers
+    public static List<Inspection> Inspections
     {
         get
         {
-            return _answers;
+            return _inspections;
         }
-
-        set
+        private set
         {
-            _answers = value;
+            _inspections = value;
         }
     }
 
-    public static Lot CurrentLot
+    private int Position(Lot lot)
     {
-        get
-        {
-            return _currentLot;
-        }
+        int index = -1;
 
-        set
-        {
-            _currentLot = value;
-        }
+        for (int i = 0; i < _lots.Count; i++)
+            if (lot == _lots[i])
+                index = i;
+
+        return index;
     }
 
-    /// <summary>
-    /// Inspections by lots
-    /// </summary>
-    public static List<List<Inspection[]>> LotInspecitons
+    private int Position(Item item)
     {
-        get
-        {
-            if(_lots !=null)
-            {
-                for (int i = 0; i < _lots.Count; i++)
-                {
-                    _lotInspecitons.Add(new List<Inspection[]>());
-                    _lotInspecitons[i].Add(new Inspection[0]);
-                }
-            }
-            return _lotInspecitons;
-        }
+        int index = -1;
 
-        set
-        {
-            _lotInspecitons = value;
-        }
-    }
+        for (int i = 0; i < _items.Count; i++)
+            if (item == _items[i])
+                index = i;
 
-    /// <summary>
-    /// Inspections by items from global Lot
-    /// </summary>
-    public static List<Inspection[]> ItemInspections
-    {
-        get
-        {
-            return LotInspecitons[Get.GlobalPosition(_lot)];
-        }
-        set
-        {
-            LotInspecitons[Get.GlobalPosition(_lot)] = value;
-        }
-    }
-
-
-    /// <summary>
-    /// Inspections from global Item
-    /// </summary>
-    public static Inspection[] Inspections
-    {
-        get
-        {
-            return ItemInspections[Get.GlobalPosition(_item)];
-        }
-        set
-        {
-            ItemInspections[Get.GlobalPosition(_item)] = value;
-        }
+        return index;
     }
 }

@@ -117,32 +117,6 @@ public class Get
         return status;
     }
 
-    public static int GlobalPosition(Lot lot)
-    {
-        int index = -1;
-
-        for (int i = 0; i < Global.Lots.Count; i++)
-        {
-            if (Global.Lots[i].Code == lot.Code)
-                index = i;
-        }
-
-        return index;
-    }
-
-    public static int GlobalPosition(Item item)
-    {
-        int index=-1;
-
-        for (int i = 0; i < Global.Items.Count; i++)
-        {
-            if (item == Global.Items[i])
-                index = i;
-        }
-
-        return index;
-    }
-
     public static bool IsInspectionChanged(List<Inspection> inspections)
     {
         bool isChanged = false;
