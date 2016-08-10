@@ -49,6 +49,22 @@ public class Catalog
         }
     }
 
+    public static List<Lot> LotsAs(Status status)
+    {
+        List<Lot> lots = new List<Lot>();
+
+        connection = new Connection();
+        DataTable table = connection.ExecuteQuery(
+            "SELECT lot_code FROM lots WHERE lot_status = " + (int)status
+            );
+        foreach (DataRow row in table.Rows)
+        {
+            lots.Add(new Lot(int.Parse(row["lot_code"].ToString())));
+        }
+
+        return lots;
+    }
+
     /// <summary>
     /// All items
     /// </summary>
