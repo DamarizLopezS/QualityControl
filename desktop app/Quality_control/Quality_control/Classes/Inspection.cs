@@ -50,6 +50,12 @@ public class Inspection
 
     }
 
+    public Inspection(int id, List<Answer> answers)
+    {
+        _id = id;
+        _answers = answers;
+    }
+
     public Inspection(List<Answer> answers)
     {
         _id = 0;
@@ -66,14 +72,17 @@ public class Inspection
 
     public List<Answer> Answers
     {
-        get
-        {
-            return _answers;
-        }
+        get { return _answers; }
+        set { _answers = value; }
+    }
 
-        set
-        {
-            _answers = value;
-        }
+    public override bool Equals(object obj)
+    {
+        return obj is Answer && (obj as Answer).Id == this.Id;
+    }
+
+    public override int GetHashCode()
+    {
+        return this.Id;
     }
 }

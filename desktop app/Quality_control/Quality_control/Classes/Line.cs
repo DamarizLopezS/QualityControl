@@ -98,4 +98,14 @@ public class Line {
     {
         return _code+":"+_name;
     }
+
+    public override bool Equals(object obj)
+    {
+        return obj is Line && (obj as Line).Code == this.Code;
+    }
+
+    public override int GetHashCode()
+    {
+        return this.Code;
+    }
 }//end Line

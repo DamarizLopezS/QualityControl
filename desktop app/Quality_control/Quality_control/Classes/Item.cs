@@ -110,4 +110,9 @@ public class Item {
     {
         return obj is Item && (obj as Item).Serie == this.Serie;
     }
+
+    public override int GetHashCode()
+    {
+        return this.Serie;
+    }
 }//end Item

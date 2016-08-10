@@ -138,4 +138,8 @@ public class Lot
     {
         return obj is Lot && (obj as Lot).Code == _code;
     }
+    public override int GetHashCode()
+    {
+        return this.Code;
+    }
 }//end Lot
