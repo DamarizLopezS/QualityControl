@@ -19,6 +19,7 @@ public class Item {
 	private int _serie;
 	private Lot _Lot;
     private Status _status;
+    private Inspection _Inspection;
 
     /// <summary>
     /// Empty Item
@@ -28,23 +29,26 @@ public class Item {
         _serie = 0;
         _Lot = new Lot();
         _status = Status.NOTEVALUATE;
+        _Inspection = new Inspection();
     }
 
     /// <summary>
     /// Item with values
     /// </summary>
-    /// <param name="serie">Serie</param>
-    /// <param name="lot">Lot</param>
-    /// <param name="status">Status</param>
+    /// <param name="serie"></param>
+    /// <param name="lot"></param>
+    /// <param name="status"></param>
+    /// <param name="inspection"></param>
     public Item(int serie, Lot lot, Status status)
     {
         _serie = serie;
         _Lot = lot;
         _status = status;
+        _Inspection = Get.Inspection(this);
     }
 
     /// <summary>
-    /// 
+    /// Gets Item from DB
     /// </summary>
     /// <param name="serie"></param>
     public Item(int serie){
@@ -60,6 +64,7 @@ public class Item {
             _serie = int.Parse(firstRow["itm_serie"].ToString());
             _Lot = new Lot(int.Parse(firstRow["lot_code"].ToString()));
             _status = (Status)firstRow["itm_status"];
+            _Inspection = new Inspection(this);
         }
         else
             throw new ObjectNotFoundException("Item");
@@ -70,8 +75,7 @@ public class Item {
     /// </summary>
 	public int Serie{
 		get{
-			return _serie;
-		}
+			return _serie;		}
 	}
 
     /// <summary>
@@ -103,6 +107,19 @@ public class Item {
         set
         {
             _status = value;
+        }
+    }
+
+    public Inspection Inspection
+    {
+        get
+        {
+            return _Inspection;
+        }
+
+        set
+        {
+            _Inspection = value;
         }
     }
 

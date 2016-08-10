@@ -25,12 +25,6 @@ namespace WPFAppQualityControl
             InitializeComponent();
         }
 
-        public InspectionStats(Lot lot)
-        {
-            InitializeComponent();
-            Global.Lot = lot;
-        }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             lblLotCode.Content = Global.Lot.Code;
@@ -43,7 +37,7 @@ namespace WPFAppQualityControl
         private void Button_SelectLot(object sender, RoutedEventArgs e)
         {
             LotsToInspection winLotsToInspect = new LotsToInspection();
-            //aqui falta para ver si se modifico algo
+            
             winLotsToInspect.Show();
             this.Close();
         }
@@ -60,8 +54,8 @@ namespace WPFAppQualityControl
             {
                 Button btn = new Button();
                 
-                Item i = (Item)dgItems.SelectedItem;
-                InspectionWindow winInspection = new InspectionWindow(Global.Items, i.Serie);
+                Global.Item = (Item)dgItems.SelectedItem;
+                InspectionWindow winInspection = new InspectionWindow();
 
                 winInspection.Show();
                 this.Close();

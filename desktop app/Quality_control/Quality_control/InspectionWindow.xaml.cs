@@ -24,35 +24,12 @@ namespace WPFAppQualityControl
         public InspectionWindow()
         {
             InitializeComponent();
-            Global.Item = new Item();
-            _itemSelectedPosition = -1;
-            Global.Inspections = new Inspection[Global.Items.Count];
         }
 
-        public InspectionWindow(List<Item> items)
-        {
-            InitializeComponent();
-            if (Global.Items.Count > 0)
-            {
-                Global.Item = Global.Items[0];
-                Global.CurrentLot = Global.Item.Lot;
-                _itemSelectedPosition = -1;
-                Global.Inspections = new Inspection[Global.Items.Count];
-            }
-        }
-
-        public InspectionWindow(List<Item> items, int itemSerie)
-        {
-            InitializeComponent();
-            Global.Item = Get.Item(Global.Items, itemSerie);
-            _itemSelectedPosition = Get.ItemPosition(Global.Items, itemSerie);
-            Global.CurrentLot = Global.Item.Lot;
-            if (Global.Inspections == null || Global.Lot != Global.CurrentLot)
-                Global.Inspections = new Inspection[Global.Items.Count];
-        }
         public void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LoadInfo();
+            Global.Inspections = new List<Inspection>(Global.Items.Count);
         }
 
         private void Button_Next(object sender, RoutedEventArgs e)
@@ -66,7 +43,7 @@ namespace WPFAppQualityControl
 
         private void Button_AllItems(object sender, RoutedEventArgs e)
         {
-            InspectionStats winInspectionStats = new InspectionStats(Global.CurrentLot);
+            InspectionStats winInspectionStats = new InspectionStats();
 
             winInspectionStats.Show();
 
@@ -90,7 +67,7 @@ namespace WPFAppQualityControl
         private void Inspect(object sender, RoutedEventArgs e)
         {
             if (Global.Inspections[_itemSelectedPosition] == null)
-                Global.Inspections[_itemSelectedPosition] = new Inspection(Get.Answers(Global.CurrentLot,Global.Item));
+                Global.Inspections[_itemSelectedPosition] = new Inspection(Get.Answers(Global.Lot,Global.Item));
 
             for (int i  = 0; i  < Global.Inspections[_itemSelectedPosition].Answers.Count; i ++)
             {
@@ -118,9 +95,9 @@ namespace WPFAppQualityControl
 
         private void ConfirmLotInspection(object sender, RoutedEventArgs e)
         {
-            if (_itemSelectedPosition + 1 < Global.Inspections.Length - 1)
+            if (_itemSelectedPosition + 1 < Global.Inspections.Count - 1)
                 Button_Next(sender, e);
-            else if (ItemsChecked() < Global.Inspections.Length)
+            else if (ItemsChecked() < Global.Inspections.Count)
             {
                 _itemSelectedPosition = FindInspection();
                 Global.Item = Global.Items[_itemSelectedPosition];
@@ -128,7 +105,7 @@ namespace WPFAppQualityControl
             }
             else
             {
-                MessageBoxResult result = MessageBox.Show("Lot: " + Global.CurrentLot.Code + " CHECKED");
+                MessageBoxResult result = MessageBox.Show("Lot: " + Global.Lot.Code + " CHECKED");
                 if (result == MessageBoxResult.OK)
                     Button_AllItems(sender, e);
             }
@@ -138,7 +115,7 @@ namespace WPFAppQualityControl
         {
             int itemsChecked = 0;
 
-            for (int i = 0; i < Global.Inspections.Length; i++)
+            for (int i = 0; i < Global.Inspections.Count; i++)
             {
                 if (Global.Inspections[i] != null)
                     itemsChecked++;
@@ -149,7 +126,7 @@ namespace WPFAppQualityControl
 
         private int FindInspection()
         {
-            int i = Global.Inspections.Length;
+            int i = Global.Inspections.Count;
 
             for (int ind = Global.Items.Count - 1; ind >= 0; ind--)
             {
@@ -175,20 +152,10 @@ namespace WPFAppQualityControl
 
         private void LoadInfo()
         {
-            lblLot.Content = Global.CurrentLot.Code;
+            lblLot.Content = Global.Lot.Code;
             lblDate.Content = DateTime.Now;
-            lblProduct.Content = Global.CurrentLot.Product;
+            lblProduct.Content = Global.Lot.Product;
             lblItemSerie.Content = Global.Item.Serie;
-            if (Global.Inspections[_itemSelectedPosition] == null || Global.Inspections.Length == 0)
-            {
-                Global.Answers = Get.Answers(Global.CurrentLot, Global.Item);
-                dgInspection.ItemsSource = Global.Answers;
-            }
-            else
-            {
-                Global.Answers = Get.Answers(Global.Inspections[_itemSelectedPosition]);
-                dgInspection.ItemsSource = Global.Answers;
-            }
             Refresh();
         }
 

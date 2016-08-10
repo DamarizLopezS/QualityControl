@@ -12,7 +12,6 @@ public class Global
     private static Item _item;
 
     private static List<Inspection> _inspections;
-    private static Inspection _inspection;
 
     public static List<Lot> Lots
     {
@@ -59,17 +58,14 @@ public class Global
         set { _item = value; }
     }
 
-    public static List<Inspection> Inspections
+    public static List<Answer> Answers
     {
         get
         {
-            return _inspections;
-        }
-        private set
-        {
-            _inspections = value;
+            return _inspections[0].Answers;
         }
     }
+
 
     private int Position(Lot lot)
     {

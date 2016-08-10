@@ -25,13 +25,6 @@ namespace WPFAppQualityControl
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            dgLots.Items.Clear();
-            Global.Lots = Catalog.LotsUnchecked;
-            dgLots.ItemsSource = Global.Lots;
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (dgLots.SelectedItem != null)
@@ -45,6 +38,39 @@ namespace WPFAppQualityControl
                     this.Close();
                 }
             }
+        }
+
+        private void Button_NotEvaluate(object sender, RoutedEventArgs e)
+        {
+            LoadLots(Catalog.LotsAs(Status.NOTEVALUATE));
+        }
+        private void Button_Approved(object sender, RoutedEventArgs e)
+        {
+            LoadLots(Catalog.LotsAs(Status.APPROVED));
+        }
+        private void Button_Rework(object sender, RoutedEventArgs e)
+        {
+            LoadLots(Catalog.LotsAs(Status.REWORK));
+        }
+        private void Button_Garbage(object sender, RoutedEventArgs e)
+        {
+            LoadLots(Catalog.LotsAs(Status.GARBAGE));
+        }
+        private void Button_All(object sender, RoutedEventArgs e)
+        {
+            LoadLots(Catalog.Lots);
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadLots(Catalog.LotsAs(Status.NOTEVALUATE));
+        }
+
+
+        private void LoadLots(List<Lot> lots)
+        {
+            Global.Lots = lots;
+            dgLots.ItemsSource = Global.Lots;
         }
     }
 }

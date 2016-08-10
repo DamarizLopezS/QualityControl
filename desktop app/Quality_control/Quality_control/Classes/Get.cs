@@ -71,6 +71,19 @@ public class Get
         return i;
     }
 
+    public static Inspection Inspection(Item item)
+    {
+        if (item.Lot.Product.Questions.Count == 0 || item.Lot.Product.Questions == null)
+            return new Inspection();
+        else
+        {
+            List<Answer> answers = new List<Answer>();
+            foreach (Question ques in item.Lot.Product.Questions)
+                answers.Add(new Answer(item,ques));
+            return new Inspection(answers);
+        }
+    }
+
     /// <summary>
     /// 
     /// </summary>
